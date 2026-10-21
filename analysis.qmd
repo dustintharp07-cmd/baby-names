@@ -1,0 +1,432 @@
+---
+title: "The Rise and Fall of the Name Dustin in the United States"
+subtitle: "Analysis of U.S. Social Security Administration birth records (1960–2026 display window; full historical dataset 1916–2025)"
+format:
+  html:
+    theme: cosmo
+    page-layout: full
+    toc: false
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+```{=html}
+<style>
+  :root {
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-blue: #0072B2;
+    --accent-orange: #D55E00;
+    --border-subtle: #e2e8f0;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.65;
+  }
+
+  #quarto-content {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 3rem 1.25rem;
+  }
+
+  header#title-block-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-top: 4px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  header#title-block-header .title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  header#title-block-header .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.15rem 1.35rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .kpi-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .kpi-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .kpi-value.accent-blue {
+    color: var(--accent-blue);
+  }
+
+  .kpi-value.accent-orange {
+    color: var(--accent-orange);
+  }
+
+  .kpi-subtext {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+  }
+
+  .dashboard-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  .dashboard-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 0.35rem;
+    border-bottom: none;
+  }
+
+  .card-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.1rem;
+  }
+
+  .takeaway-list {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .takeaway-list li {
+    margin-bottom: 0.55rem;
+    color: var(--text-secondary);
+  }
+
+  .takeaway-list li strong {
+    color: var(--text-primary);
+  }
+
+  .data-note {
+    background: #f1f5f9;
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 6px;
+    padding: 0.9rem 1.15rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    #quarto-content {
+      padding: 1rem 0.75rem 2rem 0.75rem;
+    }
+    header#title-block-header {
+      padding: 1.25rem 1.2rem;
+    }
+    header#title-block-header .title {
+      font-size: 1.5rem;
+    }
+    .dashboard-card {
+      padding: 1.15rem 1.1rem;
+    }
+  }
+</style>
+```
+
+```{r}
+library(tidyverse)
+library(scales)
+library(plotly)
+
+baby_names <- read_csv("ssa-baby-names.csv", show_col_types = FALSE)
+
+# Full historical yearly aggregation (1916-2025) - no observations filtered out
+dustin_yearly <- baby_names |>
+  filter(toupper(name) == "DUSTIN") |>
+  summarize(count = sum(count), .by = year) |>
+  arrange(year)
+
+# Summary metrics computed from the complete unfiltered dataset
+first_obs_year <- min(dustin_yearly$year)
+last_obs_year <- max(dustin_yearly$year)
+total_all_time <- sum(dustin_yearly$count)
+total_since_1960 <- dustin_yearly |>
+  filter(year >= 1960) |>
+  pull(count) |>
+  sum()
+pct_since_1960 <- (total_since_1960 / total_all_time) * 100
+
+peak_row <- dustin_yearly |> slice_max(count, n = 1, with_ties = FALSE)
+peak_year <- peak_row$year
+peak_count <- peak_row$count
+
+count_1960 <- dustin_yearly |> filter(year == 1960) |> pull(count)
+count_last <- dustin_yearly |> filter(year == last_obs_year) |> pull(count)
+```
+
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-label">Peak Popularity (`r peak_year`)</div>
+<div class="kpi-value accent-orange">`r comma(peak_count)`</div>
+<div class="kpi-subtext">Highest annual U.S. births named Dustin</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">Latest Observed Year (`r last_obs_year`)</div>
+<div class="kpi-value accent-blue">`r comma(count_last)`</div>
+<div class="kpi-subtext">2026 SSA birth records not yet released</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">Total Births (`r first_obs_year`–`r last_obs_year`)</div>
+<div class="kpi-value">`r comma(total_all_time)`</div>
+<div class="kpi-subtext">`r comma(total_since_1960)` (`r sprintf("%.1f%%", pct_since_1960)`) born since 1960</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">1960 Baseline</div>
+<div class="kpi-value">`r comma(count_1960)`</div>
+<div class="kpi-subtext">Start of the 1960–2026 chart window</div>
+</div>
+</div>
+
+<div class="dashboard-card">
+<h2>Annual U.S. Births Named Dustin (1960–2026 Axis Window)</h2>
+<div class="card-subtitle">Combined female and male births recorded by the Social Security Administration. The x-axis spans <strong>1960 to 2026</strong>; observed data runs through <strong>2025</strong> (the latest published SSA release), with the unreleased 2026 period shaded.</div>
+
+```{r}
+#| fig-width: 10
+#| fig-height: 5.5
+#| fig-dpi: 300
+#| fig-alt: "Line chart showing annual U.S. babies named Dustin from 1960 to 2026. Births rose from 53 in 1960 to a peak of 10,520 in 1985, then declined to 365 in 2025, with 2026 shaded as not yet released."
+
+x_breaks <- c(seq(1960, 2020, by = 5), 2026)
+
+dustin_yearly |>
+  ggplot(aes(x = year, y = count)) +
+  # Shaded region distinguishing last observed year (2025) from 2026 axis boundary
+  annotate(
+    "rect",
+    xmin = 2025, xmax = 2026,
+    ymin = 0, ymax = 11600,
+    fill = "#e2e8f0", alpha = 0.7
+  ) +
+  geom_vline(
+    xintercept = 2025,
+    linetype = "dashed",
+    color = "#64748b",
+    linewidth = 0.5
+  ) +
+  geom_area(fill = "#0072B2", alpha = 0.12) +
+  geom_line(linewidth = 1.15, color = "#0072B2") +
+  # Highlight key observations: 1985 peak and 2025 last observed year
+  geom_point(
+    data = dustin_yearly |> filter(year %in% c(peak_year, last_obs_year)),
+    aes(x = year, y = count),
+    color = c("#D55E00", "#0072B2"),
+    size = c(3.4, 2.8)
+  ) +
+  annotate(
+    "label",
+    x = peak_year, y = peak_count + 550,
+    label = paste0("Peak (", peak_year, "): ", comma(peak_count), " babies"),
+    fontface = "bold",
+    size = 3.5,
+    color = "#9a3412",
+    fill = "#fff7ed",
+    label.size = 0.3
+  ) +
+  annotate(
+    "label",
+    x = 2024.4, y = count_last + 1150,
+    label = paste0("Last observed (", last_obs_year, "): ", comma(count_last)),
+    hjust = 1,
+    size = 3.2,
+    color = "#0f172a",
+    fill = "#f8fafc",
+    label.size = 0.25
+  ) +
+  annotate(
+    "text",
+    x = 2024.7, y = 9800,
+    label = "2026 data not yet\nreleased by SSA →",
+    hjust = 1,
+    size = 3.1,
+    color = "#475569",
+    fontface = "italic"
+  ) +
+  scale_x_continuous(
+    breaks = x_breaks,
+    labels = label_number(accuracy = 1, big.mark = "")
+  ) +
+  scale_y_continuous(
+    breaks = seq(0, 10000, by = 2000),
+    labels = label_comma()
+  ) +
+  coord_cartesian(
+    xlim = c(1960, 2026),
+    ylim = c(0, 11600),
+    expand = FALSE
+  ) +
+  labs(
+    title = "Babies Named Dustin in the U.S. (1960–2026)",
+    subtitle = "Annual births surged during the late 1960s–1980s, peaking at 10,520 in 1985 before declining through 2025",
+    x = "Year",
+    y = "Number of Babies",
+    caption = "Source: U.S. Social Security Administration. Observations span 1916–2025; no 2026 data has been published."
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, color = "#0f172a", margin = margin(b = 4)),
+    plot.subtitle = element_text(size = 11, color = "#475569", margin = margin(b = 14)),
+    plot.caption = element_text(size = 9.5, color = "#64748b", hjust = 0, margin = margin(t = 12)),
+    axis.title.x = element_text(face = "bold", size = 11, color = "#1e293b", margin = margin(t = 10)),
+    axis.title.y = element_text(face = "bold", size = 11, color = "#1e293b", margin = margin(r = 10)),
+    axis.text = element_text(size = 10, color = "#334155"),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "#f1f5f9", linewidth = 0.4),
+    panel.grid.major.y = element_line(color = "#e2e8f0", linewidth = 0.5),
+    plot.margin = margin(10, 18, 10, 10)
+  )
+```
+</div>
+
+<div class="dashboard-card">
+<h2>Interactive Year-by-Year Explorer (1960–2026)</h2>
+<div class="card-subtitle">Hover over any point along the curve to inspect exact annual birth counts from the SSA dataset.</div>
+
+```{r}
+dustin_window <- dustin_yearly |>
+  filter(year >= 1960)
+
+plot_ly(
+  data = dustin_window,
+  x = ~year,
+  y = ~count,
+  type = "scatter",
+  mode = "lines+markers",
+  line = list(color = "#0072B2", width = 2.5),
+  marker = list(color = "#0072B2", size = 5),
+  fill = "tozeroy",
+  fillcolor = "rgba(0, 114, 178, 0.10)",
+  hovertemplate = "<b>Year:</b> %{x:d}<br><b>Babies named Dustin:</b> %{y:,}<extra></extra>",
+  name = "Observed SSA Births"
+) |>
+  add_markers(
+    data = dustin_window |> filter(year == peak_year),
+    x = ~year,
+    y = ~count,
+    marker = list(color = "#D55E00", size = 10, line = list(color = "#ffffff", width = 1.5)),
+    hovertemplate = "<b>Peak Year (%{x:d})</b><br><b>Babies named Dustin:</b> %{y:,}<extra></extra>",
+    name = "1985 Peak"
+  ) |>
+  layout(
+    xaxis = list(
+      title = "Year",
+      range = c(1960, 2026),
+      tickmode = "array",
+      tickvals = c(seq(1960, 2020, by = 5), 2026),
+      ticktext = as.character(c(seq(1960, 2020, by = 5), 2026)),
+      tickformat = "d",
+      gridcolor = "#f1f5f9",
+      zeroline = FALSE
+    ),
+    yaxis = list(
+      title = "Number of Babies",
+      range = c(0, 11600),
+      tickformat = ",",
+      gridcolor = "#e2e8f0",
+      zeroline = FALSE
+    ),
+    shapes = list(
+      list(
+        type = "rect",
+        x0 = 2025, x1 = 2026,
+        y0 = 0, y1 = 11600,
+        fillcolor = "rgba(226, 232, 240, 0.65)",
+        line = list(width = 0)
+      ),
+      list(
+        type = "line",
+        x0 = 2025, x1 = 2025,
+        y0 = 0, y1 = 11600,
+        line = list(color = "#64748b", width = 1, dash = "dash")
+      )
+    ),
+    annotations = list(
+      list(
+        x = peak_year,
+        y = peak_count,
+        text = paste0("<b>1985 Peak: ", comma(peak_count), "</b>"),
+        showarrow = TRUE,
+        arrowhead = 2,
+        ax = 0,
+        ay = -28,
+        font = list(color = "#9a3412", size = 12)
+      ),
+      list(
+        x = 2025,
+        y = count_last,
+        text = paste0("Last observed (2025): ", comma(count_last)),
+        showarrow = TRUE,
+        arrowhead = 2,
+        ax = -75,
+        ay = -30,
+        font = list(color = "#0f172a", size = 11)
+      )
+    ),
+    showlegend = FALSE,
+    margin = list(l = 65, r = 25, t = 20, b = 50),
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)",
+    hovermode = "x unified"
+  ) |>
+  config(displayModeBar = FALSE, responsive = TRUE)
+```
+</div>
+
+<div class="dashboard-card">
+<h2>Key Findings & Data Integrity Notes</h2>
+<ul class="takeaway-list">
+<li><strong>Rapid climb after 1960:</strong> Only <strong>53</strong> babies were named Dustin in 1960, before the name rose steeply in the late 1960s and 1970s (reaching <strong>1,303</strong> in 1970 and <strong>8,490</strong> in 1980).</li>
+<li><strong>1985 peak:</strong> Popularity reached its all-time high in <strong>1985</strong> with <strong>10,520</strong> births, remaining above 8,000 births per year through 1990 (<strong>8,488</strong>).</li>
+<li><strong>Post-1990 decline to present:</strong> Annual births declined to <strong>2,629</strong> in 2000, <strong>869</strong> in 2010, <strong>404</strong> in 2020, and <strong>365</strong> in 2025.</li>
+</ul>
+<div class="data-note"><strong>Methodology &amp; Axis Range Note (1960–2026):</strong> All summary statistics are computed from the complete, unfiltered U.S. Social Security Administration baby names dataset, which records <strong>209,721</strong> total births named Dustin between <strong>1916 and 2025</strong> (including 578 births prior to 1960). Setting the visible x-axis window to 1960–2026 displays the modern era without excluding any historical records from summary calculations. Because the Social Security Administration has only published birth records through <strong>2025</strong>, no data is fabricated or extrapolated for 2026.</div>
+</div>
