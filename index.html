@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Rise and Fall of the Name Dustin in the United States</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="analysis_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="analysis_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="analysis_files/libs/quarto-html/popper.min.js"></script>
+<script src="analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="analysis_files/libs/quarto-html/anchor.min.js"></script>
+<link href="analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="analysis_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="analysis_files/libs/bootstrap/bootstrap-2b4d68439645eefedcbabce836751a2f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="analysis_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="analysis_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="analysis_files/libs/plotly-binding-4.12.1/plotly.js"></script>
+<script src="analysis_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="analysis_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="analysis_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="analysis_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="analysis_files/libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="analysis_files/libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Rise and Fall of the Name Dustin in the United States</h1>
+<p class="subtitle lead">Analysis of U.S. Social Security Administration birth records (1960–2026 display window; full historical dataset 1916–2025)</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+  :root {
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent-blue: #0072B2;
+    --accent-orange: #D55E00;
+    --border-subtle: #e2e8f0;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.65;
+  }
+
+  #quarto-content {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 3rem 1.25rem;
+  }
+
+  header#title-block-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-top: 4px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  header#title-block-header .title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  header#title-block-header .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.15rem 1.35rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .kpi-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .kpi-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .kpi-value.accent-blue {
+    color: var(--accent-blue);
+  }
+
+  .kpi-value.accent-orange {
+    color: var(--accent-orange);
+  }
+
+  .kpi-subtext {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+  }
+
+  .dashboard-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  .dashboard-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0;
+    margin-bottom: 0.35rem;
+    border-bottom: none;
+  }
+
+  .card-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.1rem;
+  }
+
+  .takeaway-list {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .takeaway-list li {
+    margin-bottom: 0.55rem;
+    color: var(--text-secondary);
+  }
+
+  .takeaway-list li strong {
+    color: var(--text-primary);
+  }
+
+  .data-note {
+    background: #f1f5f9;
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 6px;
+    padding: 0.9rem 1.15rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    #quarto-content {
+      padding: 1rem 0.75rem 2rem 0.75rem;
+    }
+    header#title-block-header {
+      padding: 1.25rem 1.2rem;
+    }
+    header#title-block-header .title {
+      font-size: 1.5rem;
+    }
+    .dashboard-card {
+      padding: 1.15rem 1.1rem;
+    }
+  }
+</style>
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-label">
+Peak Popularity (1985)
+</div>
+<div class="kpi-value accent-orange">
+10,520
+</div>
+<div class="kpi-subtext">
+Highest annual U.S. births named Dustin
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">
+Latest Observed Year (2025)
+</div>
+<div class="kpi-value accent-blue">
+365
+</div>
+<div class="kpi-subtext">
+2026 SSA birth records not yet released
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">
+Total Births (1916–2025)
+</div>
+<div class="kpi-value">
+209,721
+</div>
+<div class="kpi-subtext">
+209,143 (99.7%) born since 1960
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">
+1960 Baseline
+</div>
+<div class="kpi-value">
+53
+</div>
+<div class="kpi-subtext">
+Start of the 1960–2026 chart window
+</div>
+</div>
+</div>
+<div class="dashboard-card">
+<h2 class="anchored">
+Annual U.S. Births Named Dustin (1960–2026 Axis Window)
+</h2>
+<div class="card-subtitle">
+Combined female and male births recorded by the Social Security Administration. The x-axis spans <strong>1960 to 2026</strong>; observed data runs through <strong>2025</strong> (the latest published SSA release), with the unreleased 2026 period shaded.
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" alt="Line chart showing annual U.S. babies named Dustin from 1960 to 2026. Births rose from 53 in 1960 to a peak of 10,520 in 1985, then declined to 365 in 2025, with 2026 shaded as not yet released." width="3000"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="dashboard-card">
+<h2 class="anchored">
+Interactive Year-by-Year Explorer (1960–2026)
+</h2>
+<div class="card-subtitle">
+Hover over any point along the curve to inspect exact annual birth counts from the SSA dataset.
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-7624c03684156c44f6ed" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-7624c03684156c44f6ed">{"x":{"visdat":{"55912268f060":["function () ","plotlyVisDat"],"55915e500146":["function () ","data"]},"cur_data":"55915e500146","attrs":{"55912268f060":{"x":{},"y":{},"mode":"lines+markers","line":{"color":"#0072B2","width":2.5},"marker":{"color":"#0072B2","size":5},"fill":"tozeroy","fillcolor":"rgba(0, 114, 178, 0.10)","hovertemplate":"<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","name":"Observed SSA Births","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"55915e500146":{"x":{},"y":{},"mode":"markers","line":{"color":"#0072B2","width":2.5},"marker":{"color":"#D55E00","size":10,"line":{"color":"#ffffff","width":1.5}},"fill":"tozeroy","fillcolor":"rgba(0, 114, 178, 0.10)","hovertemplate":"<b>Peak Year (%{x:d})<\/b><br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","name":"1985 Peak","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":50,"l":65,"t":20,"r":25},"xaxis":{"domain":[0,1],"automargin":true,"title":"Year","range":[1960,2026],"tickmode":"array","tickvals":[1960,1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020,2026],"ticktext":["1960","1965","1970","1975","1980","1985","1990","1995","2000","2005","2010","2015","2020","2026"],"tickformat":"d","gridcolor":"#f1f5f9","zeroline":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of Babies","range":[0,11600],"tickformat":",","gridcolor":"#e2e8f0","zeroline":false},"shapes":[{"type":"rect","x0":2025,"x1":2026,"y0":0,"y1":11600,"fillcolor":"rgba(226, 232, 240, 0.65)","line":{"width":0}},{"type":"line","x0":2025,"x1":2025,"y0":0,"y1":11600,"line":{"color":"#64748b","width":1,"dash":"dash"}}],"annotations":[{"x":1985,"y":10520,"text":"<b>1985 Peak: 10,520<\/b>","showarrow":true,"arrowhead":2,"ax":0,"ay":-28,"font":{"color":"#9a3412","size":12}},{"x":2025,"y":365,"text":"Last observed (2025): 365","showarrow":true,"arrowhead":2,"ax":-75,"ay":-30,"font":{"color":"#0f172a","size":11}}],"showlegend":false,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","hovermode":"x unified"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"fillcolor":"rgba(0, 114, 178, 0.10)","x":[1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],"y":[53,46,53,43,40,52,50,51,464,773,1303,1493,1582,1645,2215,2703,3244,3514,4212,4956,8490,9452,9631,9773,10491,10520,10427,10186,9422,9761,8488,7407,6820,6329,6474,5937,4895,4288,3445,2852,2629,2424,1987,1774,1571,1484,1338,1263,1103,1014,869,804,800,674,697,577,554,535,543,491,404,444,442,382,395,365],"mode":"lines+markers","line":{"color":"#0072B2","width":2.5},"marker":{"color":"#0072B2","size":5,"line":{"color":"rgba(31,119,180,1)"}},"fill":"tozeroy","hovertemplate":["<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","<b>Year:<\/b> %{x:d}<br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>"],"name":"Observed SSA Births","type":"scatter","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(0, 114, 178, 0.10)","x":[1985],"y":[10520],"mode":"markers+lines","line":{"color":"#0072B2","width":2.5},"marker":{"color":"#D55E00","size":10,"line":{"color":"#ffffff","width":1.5}},"fill":"tozeroy","hovertemplate":"<b>Peak Year (%{x:d})<\/b><br><b>Babies named Dustin:<\/b> %{y:,}<extra><\/extra>","name":"1985 Peak","type":"scatter","error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div class="dashboard-card">
+<h2 class="anchored">
+Key Findings &amp; Data Integrity Notes
+</h2>
+<ul class="takeaway-list">
+<li>
+<strong>Rapid climb after 1960:</strong> Only <strong>53</strong> babies were named Dustin in 1960, before the name rose steeply in the late 1960s and 1970s (reaching <strong>1,303</strong> in 1970 and <strong>8,490</strong> in 1980).
+</li>
+<li>
+<strong>1985 peak:</strong> Popularity reached its all-time high in <strong>1985</strong> with <strong>10,520</strong> births, remaining above 8,000 births per year through 1990 (<strong>8,488</strong>).
+</li>
+<li>
+<strong>Post-1990 decline to present:</strong> Annual births declined to <strong>2,629</strong> in 2000, <strong>869</strong> in 2010, <strong>404</strong> in 2020, and <strong>365</strong> in 2025.
+</li>
+</ul>
+<div class="data-note">
+<strong>Methodology &amp; Axis Range Note (1960–2026):</strong> All summary statistics are computed from the complete, unfiltered U.S. Social Security Administration baby names dataset, which records <strong>209,721</strong> total births named Dustin between <strong>1916 and 2025</strong> (including 578 births prior to 1960). Setting the visible x-axis window to 1960–2026 displays the modern era without excluding any historical records from summary calculations. Because the Social Security Administration has only published birth records through <strong>2025</strong>, no data is fabricated or extrapolated for 2026.
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
